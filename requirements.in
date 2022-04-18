@@ -1,2 +1,6 @@
+black
+blacken-docs
+build
 bumpver
 pytest
+twine
