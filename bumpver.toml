@@ -11,6 +11,6 @@ tag = true
     '__version__ = "{version}"',
 ]
 
-# "bumpver.toml" = [
-#     'current_version = "{version}"',
-# ]
+"version" = [
+    'version = "{version}"',
+]
