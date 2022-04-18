@@ -1,5 +1,7 @@
 import random
 
+__version__ = "2022.4.1"
+
 NO = frozenset(
     [
         "absolutely not",
