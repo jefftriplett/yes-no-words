@@ -11,6 +11,6 @@ tag = true
     '__version__ = "{version}"',
 ]
 
-"version" = [
-    'version = "{version}"',
+"setup.cfg" = [
+    "version = {version}",
 ]
