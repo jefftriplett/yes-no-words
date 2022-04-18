@@ -57,6 +57,14 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      - name: Configure git to push
+        run: |
+          git config --global user.email "actions@users.noreply.github.com"
+          git config --global user.name "Automated Publisher"
+
+      - name: Bump Version
+        run: pipx run bumpver update --no-fetch --verbose
+
       - name: Build
         run: pipx run build
 
@@ -65,3 +73,15 @@ jobs:
         with:
           name: dist
           path: dist
+
+      - name: Publish to PyPI
+        if: startsWith(github.ref, 'refs/heads/main')
+        env:
+          TWINE_USERNAME: ${{ secrets.TWINE_USERNAME }}
+          TWINE_PASSWORD: ${{ secrets.TWINE_PASSWORD }}
+        run: |
+          pipx run twine upload dist/*
+
+      - name: Push Release Build to GitHub
+        run: |
+          git push
