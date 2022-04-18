@@ -106,15 +106,15 @@ YES = frozenset(
 ALL = YES.union(NO)
 
 
-def all_random():
+def all_random() -> str:
     return random.choice(tuple(ALL))
 
 
-def no_random():
+def no_random() -> str:
     return random.choice(tuple(NO))
 
 
-def yes_random():
+def yes_random() -> str:
     return random.choice(tuple(YES))
 
 
