@@ -49,6 +49,7 @@ jobs:
     name: Build sdist and wheel
     runs-on: ubuntu-latest
     needs: test
+    if: startsWith(github.ref, 'refs/heads/main')
 
     steps:
       - uses: actions/checkout@v2
@@ -71,7 +72,6 @@ jobs:
           path: dist
 
       - name: Publish to PyPI
-        if: startsWith(github.ref, 'refs/heads/main')
         env:
           TWINE_USERNAME: ${{ secrets.TWINE_USERNAME }}
           TWINE_PASSWORD: ${{ secrets.TWINE_PASSWORD }}
