@@ -71,12 +71,11 @@ jobs:
           name: dist
           path: dist
 
-      - name: Publish to PyPI
-        env:
-          TWINE_USERNAME: ${{ secrets.TWINE_USERNAME }}
-          TWINE_PASSWORD: ${{ secrets.TWINE_PASSWORD }}
-        run: |
-          pipx run twine upload dist/*
+      - name: Publish a Python distribution to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          user: ${{ secrets.TWINE_USERNAME }}
+          password: ${{ secrets.TWINE_PASSWORD }}
 
       - name: Push Release Build to GitHub
         run: |
