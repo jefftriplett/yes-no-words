@@ -21,13 +21,11 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-
       - name: Set up Python
         uses: actions/setup-python@v3
         with:
           cache: 'pip'
           python-version: 3.9
-
       - name: Format with black
         run: |
           pipx run black --check .

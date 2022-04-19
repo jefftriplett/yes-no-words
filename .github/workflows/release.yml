@@ -40,8 +40,8 @@ jobs:
       #   with:
       #     user: ${{ secrets.TWINE_USERNAME }}
       #     password: ${{ secrets.TWINE_PASSWORD }}
-
       # `pypa/gh-action-pypi-publish` looks promising, but it is minutes slower...
+
       - name: Publish to PyPI
         env:
           TWINE_USERNAME: ${{ secrets.TWINE_USERNAME }}
