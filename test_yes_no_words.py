@@ -46,13 +46,13 @@ def test_yes_random():
     assert word not in yes_no_words.NO
 
 
-@pytest.mark.parametrize("test_input", tuple(yes_no_words.NO))
+@pytest.mark.parametrize("test_input", yes_no_words.NO)
 def test_is_falsy(test_input):
     assert yes_no_words.is_falsy(test_input)
     assert not yes_no_words.is_truthy(test_input)
 
 
-@pytest.mark.parametrize("test_input", tuple(yes_no_words.YES))
+@pytest.mark.parametrize("test_input", yes_no_words.YES)
 def test_is_truthy(test_input):
     assert yes_no_words.is_truthy(test_input)
     assert not yes_no_words.is_falsy(test_input)
