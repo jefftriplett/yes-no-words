@@ -1,6 +1,6 @@
 import random
 
-__version__ = "2022.4.7"
+__version__ = "2022.4.8"
 
 NO = frozenset(
     [
