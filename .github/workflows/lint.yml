@@ -1,0 +1,33 @@
+name: Linting
+
+on:
+  pull_request:
+    paths:
+      - ".github/workflows/lint.yml"
+      - "**.py"
+  push:
+    paths:
+      - ".github/workflows/lint.yml"
+      - "**.py"
+
+concurrency:
+  cancel-in-progress: true
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.sha }}
+
+jobs:
+  black:
+    runs-on: ubuntu-latest
+    name: Lints with Black
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v3
+        with:
+          cache: 'pip'
+          python-version: 3.9
+
+      - name: Format with black
+        run: |
+          pipx run black --check .

@@ -1,0 +1,54 @@
+name: Publishing to PyPI
+
+on:
+  release:
+    types:
+      - published
+
+concurrency:
+  cancel-in-progress: true
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.sha }}
+
+jobs:
+  build:
+    name: Build sdist and wheel
+    runs-on: ubuntu-latest
+    if: startsWith(github.ref, 'refs/tags')
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Configure git to push
+        run: |
+          git config --global user.email "actions@users.noreply.github.com"
+          git config --global user.name "Automated Publisher"
+
+      - name: Bump Version
+        run: pipx run bumpver update --no-fetch --verbose
+
+      - name: Build
+        run: pipx run build
+
+      - name: Archive files
+        uses: actions/upload-artifact@v1
+        with:
+          name: dist
+          path: dist
+
+      # - name: Publish a Python distribution to PyPI
+      #   uses: pypa/gh-action-pypi-publish@release/v1
+      #   with:
+      #     user: ${{ secrets.TWINE_USERNAME }}
+      #     password: ${{ secrets.TWINE_PASSWORD }}
+
+      # `pypa/gh-action-pypi-publish` looks promising, but it is minutes slower...
+      - name: Publish to PyPI
+        env:
+          TWINE_USERNAME: ${{ secrets.TWINE_USERNAME }}
+          TWINE_PASSWORD: ${{ secrets.TWINE_PASSWORD }}
+        run: |
+          pipx run twine upload dist/*
+
+      - name: Push Release Build to GitHub
+        run: |
+          git push

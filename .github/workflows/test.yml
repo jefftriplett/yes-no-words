@@ -1,0 +1,42 @@
+name: Testing
+
+on:
+  pull_request:
+    paths:
+      - ".github/workflows/actions.yml"
+      - "**.py"
+  push:
+    paths:
+      - ".github/workflows/actions.yml"
+      - "**.py"
+
+concurrency:
+  cancel-in-progress: true
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.sha }}
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    name: Tests with PyTest
+
+    strategy:
+      matrix:
+        python-version:
+          - "3.7"
+          - "3.8"
+          - "3.9"
+          - "3.10"
+          - "3.11-dev"
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v3
+        with:
+          cache: 'pip'
+          python-version: ${{ matrix.python-version }}
+
+      - name: Run tests
+        run: |
+          pipx run pytest .
