@@ -61,6 +61,13 @@ Test a word to verify if it's falsy.
 
 Test a word to verify if it's truthy.
 
+## similar projects
+
+If you find `yes-no-words` useful, then you might like one of these other projects too: 
+
+- [judy2k/ish](https://github.com/judy2k/ish) An amazing-ish comparison library.
+- [samuelcolvin/dirty-equals](https://github.com/samuelcolvin/dirty-equals) Doing dirty (but extremely useful) things with equals.
+
 ## license
 
 Apache License 2.0 :copyright: [Jeff Triplett](https://jefftriplett.com/)
