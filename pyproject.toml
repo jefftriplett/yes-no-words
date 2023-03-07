@@ -1,0 +1,62 @@
+[tool.bumpver]
+current_version = "2022.4.8"
+version_pattern = "YYYY.MM.INC1"
+commit_message = ":bookmark: bump version {old_version} -> {new_version}"
+commit = true
+push = false  # disabled for GitHub Actions
+tag = true
+
+[tool.bumpver.file_patterns]
+"yes_no_words.py" = [
+    '__version__ = "{version}"',
+]
+
+[tool.pytest.ini_options]
+# addopts = "-vv"
+norecursedirs = ".git .nox build dist"
+python_files = "test_*.py"
+
+[tool.ruff]
+# Enable Pyflakes `E` and `F` codes by default.
+select = ["E", "F"]
+ignore = ["E501", "E741"] # temporary
+
+# Allow autofix for all enabled rules (when `--fix`) is provided.
+fixable = ["A", "B", "C", "D", "E", "F"]
+unfixable = []
+
+# Exclude a variety of commonly ignored directories.
+exclude = [
+    ".bzr",
+    ".direnv",
+    ".eggs",
+    ".git",
+    ".github",
+    ".hg",
+    ".mypy_cache",
+    ".nox",
+    ".pants.d",
+    ".ruff_cache",
+    ".svn",
+    ".tox",
+    ".venv",
+    "__pypackages__",
+    "build",
+    "dist",
+    "venv",
+]
+
+per-file-ignores = {}
+
+# Same as Black.
+line-length = 120
+
+# Allow unused variables when underscore-prefixed.
+dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
+
+# Assume Python 3.7
+target-version = "py37"
+
+[tool.ruff.mccabe]
+# Unlike Flake8, default to a complexity level of 10.
+max-complexity = 10

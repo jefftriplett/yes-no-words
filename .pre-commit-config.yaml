@@ -1,0 +1,42 @@
+default_language_version:
+  python: python3.7
+
+exclude: |
+    (?x)^(
+        .nox/.*|
+        build/.*|
+        dist/.*
+    )$
+
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.4.0
+    hooks:
+      - id: check-added-large-files
+      - id: check-case-conflict
+      - id: check-json
+      - id: check-merge-conflict
+      - id: check-symlinks
+      - id: check-toml
+      - id: end-of-file-fixer
+      - id: trailing-whitespace
+  - repo: https://github.com/psf/black
+    rev: 23.1.0
+    hooks:
+      - id: black
+        alias: autoformat
+  - repo: https://github.com/asottile/blacken-docs
+    rev: 1.13.0
+    hooks:
+      - id: blacken-docs
+  - repo: https://github.com/charliermarsh/ruff-pre-commit
+    rev: 'v0.0.253'
+    hooks:
+      - id: ruff
+        alias: autoformat
+  # - repo: https://github.com/codespell-project/codespell
+  #   rev: v2.2.2
+  #   hooks:
+  #     - id: codespell
+  #       args: [--write-changes]
+  #       alias: autoformat
